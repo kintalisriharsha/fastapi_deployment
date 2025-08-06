@@ -6,7 +6,7 @@ app = FastAPI()
 
 @app.get("/", response_class=FileResponse)
 def read_root():
-    index_path = os.path.join(os.path.dirname(__file__), "index.html")
+    index_path = os.path.join(os.path.dirname(__file__), "static/index.html")
     return FileResponse(index_path, media_type="text/html")
 
 @app.get("/items/{item_id}")

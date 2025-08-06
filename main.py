@@ -1,10 +1,13 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+import os
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/", response_class=FileResponse)
 def read_root():
-    return {"Hello": "World"}
+    index_path = os.path.join(os.path.dirname(__file__), "index.html")
+    return FileResponse(index_path, media_type="text/html")
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str = None):
